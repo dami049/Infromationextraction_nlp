@@ -1,0 +1,83 @@
+<pre><span style='font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 16px;'><strong>Conference event retrieval system</strong></span><span style="font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;">
+
+The Conference event retrieval system allows users automatically retrieve relevant information from conference websites.
+The application has two groups of users - the admin user and the application user. The admin user enters the website address for a conference website. The system automatically retrieves the event name, event title, acronym, event date, event location, deadlines (submission, notification, rebuttal, camera-ready) if available and an indication as to if the event would be also held online.
+
+This project is my dissertation project as part of the requirements for the completion of an MSc in Aritificial Intelligence. My interest in Natural Language processing motivated this project.. </span>
+<span style="font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;">
+
+<strong>Tech Stack</strong></span>
+
+<span style="font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;"><strong>Frontend: </strong>Python, HTML, CSS</span>
+
+<span style="font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;"><strong>Backend:</strong> SQLite, Python</span>
+
+<span style="font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;"><strong>Web framework:</strong> Flask
+
+<strong>## Application Files</strong>
+
+<strong>**./persistence/aggregrator.db:** </strong>
+This is the database that stores the applicaiton
+
+<strong>**/persistence/crud.py**</strong> 
+This contains the classes for interacting with the database (insert, update, delete, view))
+
+<strong>**/persistence/model.py** </strong>
+Script that creates the database
+
+<strong>**/persistence/database.py**</strong>
+Manages the database connections, session and deleting tables
+
+<strong>**/Static/..** </strong>
+Contains the static files for reading the web pages (CSS and javascript)
+
+<strong>**/template/admin.htm** </strong>
+This is the ***** home page (frontend)
+
+<strong>**/template/event.htm** </strong>
+This ** the application user home page (frontend)
+
+<strong>**/template/event_update.htm**</strong> 
+This is the details page that allows the admin review entries(frontend)
+
+<strong>**/template/event_detail.htm** </strong>
+This shows the details of the event to the application user
+
+<strong>**/main.py**</strong> 
+This is the main python code that runs the application
+
+<strong>**/n_processor.py**</strong> 
+This is the main process engine that contains the functions that retrieve each of the attributes 
+
+<strong><span style="font-size: 18px;">## Libraries used</span></strong>
+
+<strong>**OS:**</strong> This module provides a portable way of using operating system dependent functionality.
+
+<strong>**request:**</strong> The requests module allows the applicaiton send HTTP requests using Python
+
+<strong>**datatime:**</strong> The datetime module supplies classes for manipulating dates and times.
+
+<strong>**BeautifulSoup:**</strong> This is a library that makes it easy to scrape information from web pages. It sits atop an HTML or XML parser
+
+<strong>**re:** </strong>
+A regular expression (or RE) specifies a set of strings that matches it; the functions in this module let applicaiton check if a particular string matches a given regular expression (or if a given regular expression matches a particular string, which comes down to the same thing)
+
+<strong>**datefinder:**</strong> A python module for locating dates inside text.
+
+<strong>**datatime:**</strong> The datetime module supplies classes for manipulating dates and times.
+
+<strong>**flask:**</strong> A framework for building web apps
+
+<strong>**sqlalchemy:**</strong>  library that facilitates the communication between Python programs and databases.
+
+
+
+<strong><span style="font-size: 18px;">## Running application</span></strong>
+
+To run application from an IDE like Phycharm or VSCode 
+    1. Open folder/source code with prefer IDE 
+    2. Run n_processor.py to create database and main.py to run the applicaiton
+
+Run using: http://127.0.0.1:5000/admin or http://Localhost:5000/admin
+
+</span></pre>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+
+  <body class="bg-light">
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-9">
+                  <h2 class="pt-3 pb-3">{{ event.event_name }}</h2>
+
+                  <br />
+                  <br />
+
+                  <p><a href="{{ event.url }}">{{ event.url }}</a></p>
+
+                  <dl class="row">
+                    <dt class="col-sm-4">Event Acronym</dt>
+                    <dd class="col-sm-8">{{ event.acronym }}</dd>
+                    <dt class="col-sm-4">Event Title</dt>
+                    <dd class="col-sm-8">{{ event.event_name }}</dd>
+                    <dt class="col-sm-4">Event Date</dt>
+                    <dd class="col-sm-8">{{ event.event_date }}</dd>
+                    <dt class="col-sm-4">Event Location</dt>
+                    <dd class="col-sm-8">{{ event.location }}</dd>
+                    <dt class="col-sm-4">Virtual</dt>
+                    <dd class="col-sm-8">{{ event.title }}</dd>
+                  </dl>
+                  <br />
+                </div>
+
+                <br />
+                <br />
+
+                <div class="col-md-12">
+                  <h6 class="title">DEADLINES</h6>
+                  {% set deadline_count = deadlines | length %} 
+                  {% if deadline_count == 0 %}
+                  <span class="fw-normal">
+                  <dl class="row"></dl>
+                    <dt class="col-sm-4">Event Date</dt>
+                    <dd class="col-sm-8">{{ event.event_date }}</dd>
+                  </dl>
+
+                  </span> {%
+                  else %}
+
+                  <div class="tab">
+                    {% for deadline in deadlines %}
+                    <button
+                      class="tablinks"
+                      onclick="openCity(event, '{{ deadline.deadlineid }}')"
+                    >
+                      {{ deadline.cycle }}
+                    </button>
+                    {% endfor %}
+                  </div>
+
+                  {% for deadline in deadlines %}
+                  <div id="{{ deadline.deadlineid }}" class="tabcontent">
+                    <span class="fw-bold">{{ deadline.document_type }}</span>
+                    <span class="fw-bold">{{ deadline.cycle }}</span>
+                    <span class="fw-normal"
+                      >{{ deadline.submission_date }}</span
+                    >
+                    <span class="fw-normal"
+                      >{{ deadline.rebuttal_period }}</span
+                    >
+                    <span class="fw-normal"
+                      >{{ deadline.notification_date }}</span
+                    >
+                    <span class="fw-normal"
+                      >{{ deadline.submission_date }}</span
+                    >
+                  </div>
+                  {% endfor %} {%endif%}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <a href="{{ url_for('display_admin') }}">Go to Admin</a>
+          </p>
+        </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted"></span>
+      </div>
+    </footer>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='bootstrap.min.js') }}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='style.js') }}"
+    ></script>
+    <script>
+      function openCity(evt, cityName) {
+            // Declare all variables
+          let i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+          }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+    </script>
+  </body>
+</html>

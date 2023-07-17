@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{{ page_title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+
+  <body class="bg-light">
+    <div class="container mt-4">
+      <table class="table" d>
+        <caption>
+          Conference Aggregator
+        </caption>
+        <thead>
+          <tr>
+            <th>Event Name</th>
+            <th>Event Date</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for event in events %} {% if event.data_processed > 0 %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ event.event_date }}</td>
+            <td>{{ event.url }}</td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='bootstrap.min.js') }}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='style.js') }}"
+    ></script>
+  </body>
+</html>

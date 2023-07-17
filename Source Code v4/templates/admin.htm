@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" /> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" /> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="bg-light">
+
+    <main>
+        <div class="container mt-4">
+
+            <div class="row">
+                <div class="col-md-12">
+                {% if error_statement %}
+                    <p class="alert alert-primary"><strong>Error:</strong> {{ error_statement }}
+                {% endif %}
+                </div>
+                
+            </div>
+
+            <div class="row">
+
+                
+
+                <div class="col-md-4">
+                    
+                    <div class="card">
+                        <div class="card-header">Register Events</div>
+                        <div class="card-body">
+                            <form action="http://127.0.0.1:5000/admin" method="post">
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="rss_url">Enter valid conference website</label>
+                                    <input type="text" id="rss_url" name="rss_url" class="form-control" required/>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-4">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <p class="mt-2">
+                        <a href="{{ url_for('user_page') }}">View as User</a>
+                    </p>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <strong class="card-header">Events</strong>
+
+                        <table class="table">
+                            <caption></caption>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Event Name</th>
+                                    <th>Location</th>
+                                    <th>Event Date</th>
+                                    <th>Virtual</th>
+                                    <th>Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in events %}
+                                {% if event.data_processed == 0 %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ event.event_name }}</td>
+                                    <td>{{ event.location }}</td>
+                                    <td>{{ event.event_date }}</td>
+                                    <td>{{ event.virtual }}</td>
+                                    <td><a href="{{ url_for('event_update', event_id=[event.eventid]) }}">Update</a>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='style.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h2 class="pt-3 pb-3">{{ event.event_name }}</h2>
+
+                                <br />
+
+                                <form action="http://127.0.0.1:5000/event_update" method="post">
+                                    <input type="hidden" id="eventId" name="eventId" value="{{ event.eventid }}">
+                                    <div class="form-outline mb-4">
+
+                                    <input type="hidden" id="cycle" name="cycle" value="{{ deadline.cycle }}">
+                                    <div class="form-outline mb-4">
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="rss_url">Link</label>
+                                            <input type="text" id="rss_url" name="rss_url" disabled class="form-control"
+                                                value="{{ event.url }}"></input>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="acronym">Acronym:</label>
+                                            <input type="text" id="acronym" name="acronym" class="form-control"
+                                                value="{{ event.acronym }}"></input>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="eventname">Event Name :</label>
+                                            <textarea class="form-control" name="eventname"
+                                                >{{ event.event_name }}</textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="date">Event Date:</label>
+                                            <input type="text" id="date" name="date" class="form-control"
+                                                value="{{ event.event_date }}"></input>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="date">Event Location:</label>
+                                            <input type="text" id="location" name="location" class="form-control"
+                                                value="{{ event.location }}"></input>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="date">Virtual</label>
+                                            <input type="text" id="virtual" name="virtual" class="form-control"
+                                                value="{{ event.virtual }}"></input>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="alldates">All Dates</label>
+                                            <textarea class="form-control" name="alldates"
+                                                >{{ deadline.date_list }}</textarea>
+                                        </div>
+
+
+                                            <h5 class="title">DEADLINES</h5>
+                                            {% set cycle_count = cycles | length %} {% if cycle_count == 1 %}
+                                            <span class="fw-normal">
+                                            </span>
+
+
+                                            <br />
+
+                                            <!-- <div class="row"> -->
+                                            <div class="row">
+                                                <div class="form-group name1 col-md-6">
+                                                    <label for="submission_date">Submission Date</label>
+<br/>                                                    <select name="submission_date" class="dropdown" id="submission_date">
+                                                        {% for c in my_list %}
+                                                        <option value="{{ c }}">{{ c }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group name2 col-md-6" >
+                                                
+                                                    <label for="rebuttal_period">Rebuttal Period</label><br/>
+                                                    <select name="rebuttal_period" class="dropdown" id="rebuttal_period">
+                                                        {% for c in my_list %}
+                                                        <option value="{{ c }}">{{ c }}</option>
+                                                        {% endfor %}
+                                                    </select>                                                    
+                                                </div>   
+
+                                                <div class="form-group name3 col-md-6">
+                                                    <label for="notification_date">Notification Date</label><br/>
+                                                    <select name="notification_date" class="dropdown" id="notification_date">
+                                                        {% for c in my_list %}
+                                                        <option value="{{ c }}">{{ c }}</option>
+                                                        {% endfor %}
+                                                    </select>                                                    
+                                                </div>
+
+                                                <div class="form-group name4 col-md-6">
+                                                    <label for="cameraready_date">Camera Ready</label> <br/>
+                                                    <select name="cameraready_date" class="dropdown" id="cameraready_date">
+                                                        {% for c in my_list %}
+                                                        <option value="{{ c }}">{{c}}</option>
+                                                        {% endfor %}
+                                                    </select>                                                      
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="date">Timezone</label>
+                                                    <input type="text" id="deadline.timezone" name="deadline.timezone" class="form-control"
+                                                        value="{{ deadline.timezone }}"></input>
+                                                </div>
+
+
+                                            </div>
+
+                                            <br /> {% else %}
+
+
+                                            <div class="tab">
+                                                {% for pcycle in cycles %}
+                                                <button class="tablinks" type="button"
+                                                    onclick="openCity(event, '{{ pcycle.deadlineid }}')">{{
+                                                    pcycle.cycle }}</button> {% endfor %}
+                                            </div>
+
+
+                                            {% for pcycle in cycles %}
+                                            <div id="{{ pcycle.deadlineid }}" class="tabcontent">
+
+
+
+                                                <br />
+
+                                                <dl class="row">
+                                                    <dt class="col-sm-3">Submission Date</dt>
+                                                    <dd class="col-sm-9">{{ pcycle.submission_date }}</dd>
+                                                    <dt class="col-sm-3">Rebuttal Period</dt>
+                                                    <dd class="col-sm-9">{{ pcycle.rebuttal_period }}</dd>
+                                                    <dt class="col-sm-3">Notification Date</dt>
+                                                    <dd class="col-sm-9">{{ pcycle.notification_date }}</dd>
+                                                    <dt class="col-sm-3">Camera Ready</dt>
+                                                    <dd class="col-sm-9">{{ pcycle.cameraready_date }}</dd>
+                                                    <dt class="col-sm-3">Timezone</dt>
+                                                    <dd class="col-sm-9">{{ pcycle.timezone }}</dd>
+                                                </dl>
+
+                                                <br />
+
+
+
+                                            </div>
+                                            {% endfor %} {%endif%}
+                                        </div>
+
+
+                                        <div class="btn-group btn-group-justified">
+                                            <div class="btn-group mr-2">
+                                                <button type="submit" class="btn btn-primary" name="submit"
+                                                    value="confirm">Confirm</button>
+                                            </div>
+
+                                            <div class="btn-group ml-2">
+                                                <button type="submit" class="btn btn-primary" name="submit"
+                                                    value="edit">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <br />
+                            </div>
+
+                            <br />
+                            <br />
+
+                        </div>
+                    </div>
+                </div>
+
+                <p>
+                    <a href="{{ url_for('display_admin') }}">Go to Admin</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted"></span>
+        </div>
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='style.js') }}"></script>
+    <!-- <script>
+        function openCity(evt, cityName) {
+            // Declare all variables
+            let i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script> -->
+</body>
+
+</html>

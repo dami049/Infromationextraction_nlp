@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+
+  <body class="bg-light">
+    <div class="container mt-4">
+      <div class="card mb-4">
+        <div class="card-header">Conference Aggregator</div>
+
+        <table class="table table-striped">
+          <caption></caption>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Event Name</th>
+              <th>Event Link</th>
+              <th>Event Date</th>
+              <th>Event Location</th>
+              <th>View Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for event in events %} {% if event.data_processed > 0 %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ event.event_name }}</td>
+              <td>{{ event.url }}</td>
+              <td>{{ event.event_date }}</td>
+              <td>{{ event.location }}</td>
+              <td>
+                <a
+                  href="{{ url_for('event_detail', event_id=[event.eventid]) }}"
+                  >Detail</a
+                >
+              </td>
+            </tr>
+            {% endif %} {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <a href="{{ url_for('display_admin') }}">Go to Admin</a>
+      </p>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='bootstrap.min.js') }}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='style.js') }}"
+    ></script>
+  </body>
+</html>
