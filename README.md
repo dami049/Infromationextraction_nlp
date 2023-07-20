@@ -2,12 +2,13 @@
 Conference event retrieval system
 
 The Conference event retrieval system allows users automatically retrieve relevant information from conference websites.
-The application has two groups of users - the admin user and the application user. The admin user enters the website address for a conference website. The system automatically retrieves the event name, event title, acronym, event date, event location, deadlines (submission, notification, rebuttal, camera-ready) if available and an indication as to if the event would be also held online.
+The application has two groups of users - the admin user and the application user. The admin user enters the website address for a conference website. The system automatically retrieves the event name, event title, acronym, event date, event location, deadlines (submission, notification, rebuttal, camera-ready) if available and an indication as to if the event would also be held online.
 
-This project is my dissertation project as part of the requirements for the completion of an MSc in Aritificial Intelligence. My interest in Natural Language processing motivated this project.. 
+This project is my dissertation project as part of the requirements for the completion of an MSc in Artificial Intelligence. My interest in Natural Language processing motivated this project.. 
 
 
 Tech Stack
+NLP: spaCy (open-source library for advanced NLP processing) - https://spacy.io/, Tecoholic (Annotation) - https://tecoholic.github.io/ner-annotator/
 
 Frontend: Python, HTML, CSS
 
@@ -18,7 +19,7 @@ Web framework: Flask
 ## Application Files
 
 **./persistence/aggregrator.db:** 
-This is the database that stores the applicaiton
+This is the database that stores the application
 
 **/persistence/crud.py** 
 This contains the classes for interacting with the database (insert, update, delete, view))
